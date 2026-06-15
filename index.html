@@ -6,494 +6,534 @@
   <title>Emmanuel Omonso Anasi — Systems Developer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:           #0D1117;
-      --surface:      #161B22;
-      --surface-2:    #1C2128;
-      --accent:       #E07B39;
-      --accent-dim:   rgba(224,123,57,0.12);
-      --teal:         #4ECDC4;
-      --teal-dim:     rgba(78,205,196,0.12);
-      --text:         #E6EDF3;
-      --muted:        #7D8590;
-      --border:       rgba(255,255,255,0.08);
-      --border-hover: rgba(255,255,255,0.14);
-      --font-display: 'Space Grotesk', sans-serif;
-      --font-body:    'Inter', sans-serif;
-      --font-mono:    'JetBrains Mono', monospace;
+      --bg:          #F8F6F1;
+      --bg-card:     #EFECE5;
+      --bg-card-2:   #E8E4DA;
+      --ink:         #1A1714;
+      --ink-2:       #6A6560;
+      --ink-3:       #A09A92;
+      --green:       #1B5E35;
+      --green-dim:   rgba(27,94,53,0.08);
+      --green-mid:   rgba(27,94,53,0.18);
+      --amber:       #B87010;
+      --amber-dim:   rgba(184,112,16,0.09);
+      --border:      rgba(26,23,20,0.09);
+      --border-md:   rgba(26,23,20,0.15);
+      --fd: 'Cormorant Garamond', Georgia, serif;
+      --fb: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --fm: 'JetBrains Mono', 'Courier New', monospace;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: var(--font-body);
       background: var(--bg);
-      color: var(--text);
+      color: var(--ink);
+      font-family: var(--fb);
       font-size: 16px;
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* NAV */
+    @media (prefers-reduced-motion: reduce) {
+      *, .reveal { transition: none !important; animation: none !important; }
+    }
+
+    /* ─── NAV ─── */
     nav {
       position: sticky;
       top: 0;
-      z-index: 100;
-      background: rgba(13,17,23,0.85);
-      backdrop-filter: blur(12px);
+      z-index: 50;
+      background: rgba(248,246,241,0.93);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
+      transition: box-shadow 0.2s;
+    }
+    .nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
       padding: 0 2rem;
+      height: 60px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      height: 56px;
     }
-    .nav-logo {
-      font-family: var(--font-display);
+    .nav-brand {
+      font-family: var(--fd);
       font-weight: 700;
-      font-size: 15px;
-      color: var(--text);
-      letter-spacing: 0.01em;
+      font-size: 19px;
+      color: var(--ink);
+      letter-spacing: 0.005em;
+      text-decoration: none;
     }
-    .nav-logo span { color: var(--accent); }
-    .nav-links {
+    .nav-brand em { font-style: italic; color: var(--green); }
+    nav ul {
       display: flex;
       gap: 2rem;
       list-style: none;
     }
-    .nav-links a {
+    nav ul a {
       font-size: 13px;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
-      font-family: var(--font-display);
       font-weight: 500;
+      color: var(--ink-2);
+      text-decoration: none;
       letter-spacing: 0.02em;
+      transition: color 0.15s;
     }
-    .nav-links a:hover { color: var(--text); }
+    nav ul a:hover { color: var(--ink); }
+    @media (max-width: 480px) {
+      nav ul .hide-sm { display: none; }
+    }
 
-    /* HERO */
+    /* ─── HERO ─── */
     .hero {
-      max-width: 900px;
+      max-width: 1120px;
       margin: 0 auto;
-      padding: 100px 2rem 80px;
-    }
-    .hero-eyebrow {
-      font-family: var(--font-mono);
-      font-size: 13px;
-      color: var(--accent);
-      margin-bottom: 1.5rem;
-      letter-spacing: 0.08em;
-    }
-    .hero-eyebrow::before { content: '// '; opacity: 0.5; }
-    .hero h1 {
-      font-family: var(--font-display);
-      font-size: clamp(2.8rem, 6vw, 4.5rem);
-      font-weight: 700;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.5rem;
-    }
-    .hero h1 .first { color: var(--text); }
-    .hero h1 .last {
-      color: var(--accent);
-      position: relative;
-      display: inline-block;
-    }
-    .hero h1 .last::after {
-      content: '';
-      position: absolute;
-      left: 0; right: 0; bottom: -4px;
-      height: 3px;
-      background: var(--accent);
-      border-radius: 2px;
-      opacity: 0.4;
-    }
-    .hero-role {
-      font-family: var(--font-display);
-      font-size: clamp(1rem, 2.5vw, 1.25rem);
-      color: var(--muted);
-      margin-top: 1.5rem;
-      min-height: 2em;
-    }
-    #typed-role { color: var(--text); font-weight: 500; }
-    .cursor {
-      display: inline-block;
-      width: 2px;
-      height: 1.1em;
-      background: var(--accent);
-      margin-left: 2px;
-      vertical-align: middle;
-      animation: blink 1s steps(1) infinite;
-    }
-    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-
-    .hero-tagline {
-      margin-top: 1.5rem;
-      max-width: 600px;
-      color: var(--muted);
-      font-size: 1rem;
-      line-height: 1.8;
-    }
-
-    .hero-badges {
+      padding: 5rem 2rem 3rem;
+      min-height: calc(93vh - 60px);
       display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 2rem;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
     }
-    .badge {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      padding: 6px 14px;
-      border-radius: 100px;
-      border: 1px solid;
+    .hero-bg-word {
+      position: absolute;
+      right: -0.5rem;
+      top: 50%;
+      transform: translateY(-55%);
+      font-family: var(--fd);
+      font-weight: 700;
+      font-style: italic;
+      font-size: clamp(100px, 20vw, 210px);
+      color: rgba(27,94,53,0.055);
+      letter-spacing: -0.04em;
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
       white-space: nowrap;
     }
-    .badge-accent {
-      border-color: rgba(224,123,57,0.4);
-      background: var(--accent-dim);
-      color: var(--accent);
+    .hero-content {
+      position: relative;
+      z-index: 1;
     }
-    .badge-teal {
-      border-color: rgba(78,205,196,0.4);
-      background: var(--teal-dim);
-      color: var(--teal);
+    .hero-eyebrow {
+      font-family: var(--fm);
+      font-size: 11.5px;
+      color: var(--ink-3);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
     }
-    .badge-muted {
-      border-color: var(--border);
-      background: var(--surface);
-      color: var(--muted);
+    .hero-name {
+      font-family: var(--fd);
+      font-weight: 700;
+      font-size: clamp(3.6rem, 9.5vw, 8rem);
+      line-height: 0.88;
+      letter-spacing: -0.025em;
+    }
+    .hero-name .first { display: block; color: var(--ink); }
+    .hero-name .last  { display: block; color: var(--green); }
+
+    .hero-roles {
+      margin-top: 2.25rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0;
+      font-family: var(--fm);
+      font-size: 12.5px;
+    }
+    .hero-roles .role { color: var(--ink); }
+    .hero-roles .sep {
+      margin: 0 0.7rem;
+      color: var(--green);
+      font-size: 14px;
+      line-height: 1;
     }
 
-    .hero-cta {
-      display: flex;
-      gap: 12px;
+    .hero-tagline {
+      margin-top: 1.75rem;
+      max-width: 530px;
+      color: var(--ink-2);
+      font-size: 1.0625rem;
+      line-height: 1.85;
+    }
+
+    .hero-actions {
       margin-top: 2.5rem;
+      display: flex;
+      gap: 10px;
       flex-wrap: wrap;
     }
     .btn {
-      font-family: var(--font-display);
-      font-size: 14px;
+      font-family: var(--fb);
+      font-size: 13.5px;
       font-weight: 500;
       padding: 10px 22px;
-      border-radius: 8px;
+      border-radius: 6px;
       text-decoration: none;
-      transition: all 0.2s;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      border: 1px solid;
+      gap: 7px;
       cursor: pointer;
+      transition: all 0.15s;
+      border: 1.5px solid transparent;
+      letter-spacing: 0.01em;
     }
-    .btn-primary {
-      background: var(--accent);
+    .btn-solid {
+      background: var(--green);
       color: #fff;
-      border-color: var(--accent);
+      border-color: var(--green);
     }
-    .btn-primary:hover { background: #c96b2d; border-color: #c96b2d; }
-    .btn-ghost {
+    .btn-solid:hover { background: #154a28; border-color: #154a28; }
+    .btn-outline {
       background: transparent;
-      color: var(--text);
-      border-color: var(--border-hover);
+      color: var(--ink);
+      border-color: var(--border-md);
     }
-    .btn-ghost:hover { border-color: var(--muted); background: var(--surface); }
+    .btn-outline:hover { border-color: var(--ink-2); background: var(--bg-card); }
 
-    /* SECTIONS */
-    section {
-      max-width: 900px;
+    /* Hero stat strip */
+    .hero-stats {
+      position: relative;
+      z-index: 1;
+      padding-top: 3rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+    .stat-num {
+      font-family: var(--fd);
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .stat-num sup {
+      font-size: 1.1rem;
+      vertical-align: super;
+      color: var(--green);
+      font-weight: 600;
+    }
+    .stat-lbl {
+      font-family: var(--fm);
+      font-size: 11px;
+      color: var(--ink-3);
+      margin-top: 5px;
+      letter-spacing: 0.05em;
+    }
+    @media (max-width: 640px) {
+      .hero { padding-top: 3rem; }
+      .hero-stats { gap: 1.75rem; }
+    }
+
+    /* ─── SECTION WRAPPER ─── */
+    .section {
+      max-width: 1120px;
       margin: 0 auto;
       padding: 80px 2rem;
       border-top: 1px solid var(--border);
     }
-    .section-label {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--accent);
-      letter-spacing: 0.1em;
+    .sec-label {
+      font-family: var(--fm);
+      font-size: 11px;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      margin-bottom: 0.75rem;
+      color: var(--green);
+      margin-bottom: 0.5rem;
     }
-    .section-label::before { content: '// '; opacity: 0.5; }
-    .section-title {
-      font-family: var(--font-display);
-      font-size: clamp(1.5rem, 3vw, 2rem);
+    .sec-title {
+      font-family: var(--fd);
+      font-size: clamp(2rem, 4.5vw, 3.25rem);
       font-weight: 700;
+      line-height: 1.08;
       letter-spacing: -0.02em;
-      color: var(--text);
-      margin-bottom: 2.5rem;
+      color: var(--ink);
+      margin-bottom: 3rem;
+    }
+    .sec-title em {
+      font-style: italic;
+      color: var(--ink-2);
     }
 
-    /* ABOUT */
+    /* ─── ABOUT ─── */
     .about-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 2rem;
+      gap: 3rem;
       align-items: start;
     }
-    @media (max-width: 640px) { .about-grid { grid-template-columns: 1fr; } }
-    .about-text p + p { margin-top: 1rem; }
-    .about-text p { color: var(--muted); line-height: 1.9; }
-    .about-text strong { color: var(--text); font-weight: 500; }
+    @media (max-width: 720px) { .about-grid { grid-template-columns: 1fr; } }
 
-    .nlp-callout {
-      background: var(--teal-dim);
-      border: 1px solid rgba(78,205,196,0.2);
-      border-radius: 12px;
-      padding: 1.5rem;
+    .about-text p { color: var(--ink-2); line-height: 1.9; }
+    .about-text p + p { margin-top: 1rem; }
+    .about-text strong { color: var(--ink); font-weight: 600; }
+
+    .nlp-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--green);
+      border-radius: 10px;
+      padding: 1.75rem;
     }
-    .nlp-callout-label {
-      font-family: var(--font-mono);
+    .nlp-card-label {
+      font-family: var(--fm);
       font-size: 11px;
-      color: var(--teal);
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      margin-bottom: 0.75rem;
-    }
-    .nlp-callout p {
-      font-size: 14px;
-      color: var(--text);
-      line-height: 1.8;
-    }
-    .nlp-callout p + p { margin-top: 0.75rem; }
-    .nlp-callout .focus-items {
-      list-style: none;
-      margin-top: 1rem;
-    }
-    .nlp-callout .focus-items li {
-      font-size: 13px;
-      color: var(--teal);
-      font-family: var(--font-mono);
-      padding: 3px 0;
-    }
-    .nlp-callout .focus-items li::before { content: '→ '; opacity: 0.6; }
-
-    /* SKILLS */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
-    }
-    .skill-group {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.25rem 1.5rem;
-    }
-    .skill-group-title {
-      font-family: var(--font-display);
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--accent);
+      color: var(--green);
       margin-bottom: 1rem;
-      letter-spacing: 0.03em;
     }
-    .skill-tags {
+    .nlp-card p {
+      font-size: 14px;
+      color: var(--ink-2);
+      line-height: 1.85;
+    }
+    .nlp-card p + p { margin-top: 0.75rem; }
+    .nlp-list {
+      list-style: none;
+      margin-top: 1.25rem;
       display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
+      flex-direction: column;
+      gap: 7px;
     }
-    .skill-tag {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      padding: 4px 10px;
-      background: var(--surface-2);
+    .nlp-list li {
+      font-family: var(--fm);
+      font-size: 12px;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+    .nlp-list li::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      flex-shrink: 0;
+    }
+
+    /* ─── SKILLS ─── */
+    .skill-rows { display: flex; flex-direction: column; }
+    .skill-row {
+      display: grid;
+      grid-template-columns: 190px 1fr;
+      gap: 2rem;
+      padding: 1.2rem 0;
+      border-bottom: 1px solid var(--border);
+      align-items: start;
+    }
+    .skill-rows .skill-row:first-child { border-top: 1px solid var(--border); }
+    .skill-row-cat {
+      font-family: var(--fm);
+      font-size: 11.5px;
+      color: var(--ink-2);
+      letter-spacing: 0.03em;
+      padding-top: 5px;
+    }
+    .pills { display: flex; flex-wrap: wrap; gap: 6px; }
+    .pill {
+      font-family: var(--fm);
+      font-size: 11.5px;
+      padding: 4px 11px;
+      border-radius: 3px;
+      background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 4px;
-      color: var(--muted);
+      color: var(--ink-2);
       white-space: nowrap;
     }
-    .skill-tag.highlight {
-      background: var(--teal-dim);
-      border-color: rgba(78,205,196,0.25);
-      color: var(--teal);
+    .pill.g {
+      background: var(--green-dim);
+      border-color: var(--green-mid);
+      color: var(--green);
+    }
+    .pill.a {
+      background: var(--amber-dim);
+      border-color: rgba(184,112,16,0.22);
+      color: var(--amber);
+    }
+    @media (max-width: 600px) {
+      .skill-row { grid-template-columns: 1fr; gap: 0.6rem; }
     }
 
-    /* EXPERIENCE TIMELINE */
-    .timeline {
-      position: relative;
-      padding-left: 2rem;
+    /* ─── EXPERIENCE ─── */
+    .exp-entries { display: flex; flex-direction: column; gap: 0; }
+    .exp-entry {
+      display: grid;
+      grid-template-columns: 210px 1fr;
+      gap: 2.5rem;
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--border);
     }
-    .timeline::before {
+    .exp-entry:first-child { border-top: 1px solid var(--border); }
+    @media (max-width: 720px) {
+      .exp-entry { grid-template-columns: 1fr; gap: 0.75rem; }
+    }
+    .exp-left {}
+    .exp-period {
+      font-family: var(--fd);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.25;
+    }
+    .exp-org {
+      font-family: var(--fm);
+      font-size: 11px;
+      color: var(--ink-3);
+      letter-spacing: 0.04em;
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+    .exp-right {}
+    .exp-role {
+      font-family: var(--fd);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+    }
+    .exp-bul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .exp-bul li {
+      font-size: 14px;
+      color: var(--ink-2);
+      padding-left: 1.25rem;
+      position: relative;
+      line-height: 1.75;
+    }
+    .exp-bul li::before {
       content: '';
       position: absolute;
       left: 0;
-      top: 8px;
-      bottom: 8px;
-      width: 2px;
-      background: linear-gradient(to bottom, var(--accent), rgba(224,123,57,0.1));
-      border-radius: 2px;
-    }
-    .timeline-item {
-      position: relative;
-      margin-bottom: 3rem;
-    }
-    .timeline-item:last-child { margin-bottom: 0; }
-    .timeline-dot {
-      position: absolute;
-      left: -2.5rem;
-      top: 6px;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: var(--accent);
-      border: 2px solid var(--bg);
-    }
-    .timeline-item:last-child .timeline-dot { background: var(--muted); }
-    .timeline-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-items: center;
-      margin-bottom: 0.5rem;
-    }
-    .timeline-period {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--accent);
-      letter-spacing: 0.05em;
-    }
-    .timeline-org {
-      font-size: 12px;
-      color: var(--muted);
-      padding: 2px 10px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 100px;
-    }
-    .timeline-role {
-      font-family: var(--font-display);
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 0.75rem;
-    }
-    .timeline-item ul {
-      list-style: none;
-      padding-left: 0;
-    }
-    .timeline-item ul li {
-      font-size: 14px;
-      color: var(--muted);
-      padding: 4px 0;
-      padding-left: 1.25rem;
-      position: relative;
-      line-height: 1.7;
-    }
-    .timeline-item ul li::before {
-      content: '—';
-      position: absolute;
-      left: 0;
-      color: var(--accent);
-      opacity: 0.5;
+      top: 11px;
+      width: 6px;
+      height: 1px;
+      background: var(--green);
     }
 
-    /* PROJECTS */
-    .projects-grid {
+    /* ─── PROJECTS ─── */
+    .proj-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.25rem;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 1.2rem;
     }
-    .project-card {
-      background: var(--surface);
+    .proj-card {
+      background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 10px;
       padding: 1.5rem;
-      transition: border-color 0.2s, background 0.2s;
-    }
-    .project-card:hover {
-      border-color: var(--border-hover);
-      background: var(--surface-2);
-    }
-    .project-card-top {
       display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 0.75rem;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.18s, box-shadow 0.18s;
     }
-    .project-icon {
-      font-size: 22px;
+    .proj-card:hover {
+      border-color: var(--border-md);
+      box-shadow: 0 2px 16px rgba(26,23,20,0.06);
     }
-    .project-tag {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      padding: 3px 8px;
-      border-radius: 4px;
-      letter-spacing: 0.05em;
+    .proj-accent {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--green);
+      border-radius: 10px 10px 0 0;
     }
-    .tag-accent { background: var(--accent-dim); color: var(--accent); }
-    .tag-teal   { background: var(--teal-dim);   color: var(--teal);   }
-    .tag-muted  { background: var(--surface-2);  color: var(--muted); border: 1px solid var(--border); }
+    .proj-accent.amber { background: var(--amber); }
 
-    .project-title {
-      font-family: var(--font-display);
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 0.5rem;
+    .proj-cat {
+      font-family: var(--fm);
+      font-size: 10.5px;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 0.55rem;
+      margin-top: 0.25rem;
     }
-    .project-desc {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.7;
-      margin-bottom: 1rem;
+    .proj-cat.amber { color: var(--amber); }
+    .proj-title {
+      font-family: var(--fd);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.25;
+      margin-bottom: 0.6rem;
+      letter-spacing: -0.01em;
     }
-    .project-stack {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
+    .proj-desc {
+      font-size: 13.5px;
+      color: var(--ink-2);
+      line-height: 1.75;
+      flex: 1;
+      margin-bottom: 1.1rem;
     }
-    .stack-pill {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      padding: 2px 8px;
-      background: var(--surface-2);
-      border: 1px solid var(--border);
+    .proj-stack { display: flex; flex-wrap: wrap; gap: 5px; }
+    .proj-pill {
+      font-family: var(--fm);
+      font-size: 10.5px;
+      padding: 3px 9px;
       border-radius: 3px;
-      color: var(--muted);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--ink-3);
     }
 
-    /* EDUCATION */
+    /* ─── EDUCATION ─── */
     .edu-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.25rem;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 1.2rem;
     }
     .edu-card {
-      background: var(--surface);
+      background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 10px;
       padding: 1.5rem;
     }
-    .edu-card.current { border-color: rgba(224,123,57,0.3); }
-    .edu-degree {
-      font-family: var(--font-display);
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 0.25rem;
+    .edu-card.active {
+      border-left: 3px solid var(--green);
+    }
+    .edu-deg {
+      font-family: var(--fd);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.2rem;
+      letter-spacing: -0.01em;
     }
     .edu-spec {
       font-size: 13px;
-      color: var(--accent);
-      margin-bottom: 0.5rem;
+      color: var(--green);
+      font-weight: 500;
+      margin-bottom: 0.55rem;
     }
     .edu-meta {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--muted);
+      font-family: var(--fm);
+      font-size: 11.5px;
+      color: var(--ink-3);
     }
 
-    /* FOOTER */
+    /* ─── FOOTER ─── */
     footer {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 3rem 2rem;
       border-top: 1px solid var(--border);
+      background: var(--bg);
+    }
+    .footer-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -501,403 +541,439 @@
       gap: 1rem;
     }
     .footer-name {
-      font-family: var(--font-display);
+      font-family: var(--fd);
+      font-size: 1.1rem;
       font-weight: 700;
-      color: var(--text);
-      font-size: 15px;
+      color: var(--ink);
     }
-    .footer-name span { color: var(--accent); }
+    .footer-name em { font-style: italic; color: var(--green); }
     .footer-links {
       display: flex;
-      gap: 1.5rem;
+      gap: 2rem;
       list-style: none;
     }
     .footer-links a {
       font-size: 13px;
-      color: var(--muted);
+      color: var(--ink-2);
       text-decoration: none;
-      transition: color 0.2s;
+      transition: color 0.15s;
     }
-    .footer-links a:hover { color: var(--text); }
-
-    /* RESPONSIVE */
+    .footer-links a:hover { color: var(--ink); }
     @media (max-width: 640px) {
-      nav { padding: 0 1rem; }
-      .nav-links { gap: 1.25rem; }
-      .hero, section { padding-left: 1.25rem; padding-right: 1.25rem; }
-      footer { padding-left: 1.25rem; padding-right: 1.25rem; flex-direction: column; align-items: flex-start; }
-    }
-    @media (max-width: 480px) {
-      .nav-links li:nth-child(n+4) { display: none; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
     }
 
-    /* SCROLL FADE-IN */
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
-    .reveal.visible { opacity: 1; transform: none; }
+    /* ─── SCROLL REVEAL ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .reveal.in {
+      opacity: 1;
+      transform: none;
+    }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
   <nav>
-    <div class="nav-logo">Emmanuel <span>Anasi</span></div>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#education">Education</a></li>
-    </ul>
+    <div class="nav-inner">
+      <a href="#" class="nav-brand">Emmanuel <em>Anasi</em></a>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li class="hide-sm"><a href="#experience">Experience</a></li>
+        <li class="hide-sm"><a href="#projects">Projects</a></li>
+        <li><a href="#education">Education</a></li>
+      </ul>
+    </div>
   </nav>
 
-  <!-- HERO -->
+  <!-- ══ HERO ══ -->
   <div class="hero">
-    <p class="hero-eyebrow">Based in Nairobi, Kenya</p>
-    <h1>
-      <span class="first">Emmanuel<br></span>
-      <span class="last">Omonso Anasi</span>
-    </h1>
-    <p class="hero-role">
-      <span id="typed-role"></span><span class="cursor"></span>
-    </p>
-    <p class="hero-tagline">
-      Systems developer with 5+ years building enterprise integrations, data pipelines, and academic platforms. Currently expanding into machine learning and natural language processing — particularly applied NLP for real-world information systems.
-    </p>
-    <div class="hero-badges">
-      <span class="badge badge-accent">5+ yrs enterprise dev</span>
-      <span class="badge badge-teal">ML / NLP — active research</span>
-      <span class="badge badge-muted">MSc IT · Business Intelligence</span>
-      <span class="badge badge-muted">Nairobi, Kenya 🇰🇪</span>
+    <div class="hero-bg-word" aria-hidden="true">OMONSO</div>
+
+    <div class="hero-content">
+      <p class="hero-eyebrow">Nairobi, Kenya &nbsp;·&nbsp; Software Developer</p>
+
+      <h1 class="hero-name">
+        <span class="first">Emmanuel</span>
+        <span class="last">Anasi</span>
+      </h1>
+
+      <div class="hero-roles">
+        <span class="role">Systems Developer</span>
+        <span class="sep">/</span>
+        <span class="role">NLP Researcher</span>
+        <span class="sep">/</span>
+        <span class="role">Ekegusii Language Keeper</span>
+      </div>
+
+      <p class="hero-tagline">
+        Five years building enterprise integrations, academic platforms, and
+        data pipelines across Kenya. Currently researching NLP-driven helpdesk
+        automation for my MSc — and digitising the Ekegusii language on the side.
+      </p>
+
+      <div class="hero-actions">
+        <a href="mailto:Emmanuelomonso@gmail.com" class="btn btn-solid">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <path d="m22 7-10 7L2 7"/>
+          </svg>
+          Get in touch
+        </a>
+        <a href="https://github.com/omonsoanasi" target="_blank" rel="noopener" class="btn btn-outline">
+          <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57
+            0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695
+            -.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99
+            .105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225
+            -.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405
+            c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225
+            0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3
+            0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+          GitHub
+        </a>
+      </div>
     </div>
-    <div class="hero-cta">
-      <a href="mailto:Emmanuelomonso@gmail.com" class="btn btn-primary">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16v16H4z" rx="2"/><polyline points="22,6 12,12 2,6"/></svg>
-        Get in touch
-      </a>
-      <a href="https://github.com/omonsoanasi" target="_blank" class="btn btn-ghost">
-        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-        GitHub
-      </a>
+
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">5<sup>+</sup></div>
+        <div class="stat-lbl">years enterprise dev</div>
+      </div>
+      <div>
+        <div class="stat-num">1,500<sup>+</sup></div>
+        <div class="stat-lbl">staff records automated</div>
+      </div>
+      <div>
+        <div class="stat-num">6,000<sup>+</sup></div>
+        <div class="stat-lbl">platform users</div>
+      </div>
+      <div>
+        <div class="stat-num">30k</div>
+        <div class="stat-lbl">helpdesk tickets (research)</div>
+      </div>
     </div>
   </div>
 
-  <!-- ABOUT -->
-  <section id="about">
+  <!-- ══ ABOUT ══ -->
+  <div class="section" id="about">
     <div class="reveal">
-      <p class="section-label">about me</p>
-      <h2 class="section-title">Builder, integrator,<br>language nerd</h2>
+      <p class="sec-label">about</p>
+      <h2 class="sec-title">Builder, integrator,<br><em>language keeper</em></h2>
     </div>
-    <div class="about-grid reveal">
-      <div class="about-text">
+    <div class="about-grid">
+      <div class="about-text reveal">
         <p>
-          I spend most of my time designing and maintaining the integrations that quietly hold enterprise systems together — the kind of work where you have to understand the business, the data, and the code all at once.
+          I spend most of my time designing and maintaining the integrations
+          that quietly hold enterprise systems together — the kind of work where
+          you have to understand the business, the data, and the code all at once.
         </p>
         <p>
-          My background spans <strong>HR platforms, academic management systems, and government-facing regulatory portals</strong> — building from requirements gathering with non-technical stakeholders all the way through architecture, deployment, and documentation.
+          My background spans <strong>HR platforms, academic management systems,
+          and government-facing regulatory portals</strong> — building from
+          requirements gathering with non-technical stakeholders all the way
+          through to architecture, deployment, and documentation.
         </p>
         <p>
-          Outside of systems work, I am passionate about African language preservation through technology. I maintain a personal platform for digitising the <strong>A language and culture</strong>, building flashcard systems, proverb libraries, and contributor workflows.
+          Outside of systems work, I run a personal platform for preserving the
+          <strong>Ekegusii language and culture</strong> — building flashcard
+          systems, proverb libraries, and contributor workflows — because
+          technology is one of the few tools that can keep a language alive.
         </p>
       </div>
-      <div class="nlp-callout">
-        <p class="nlp-callout-label">Current focus ✦ ML & NLP</p>
-        <p>I am actively moving into machine learning — specifically natural language processing applied to information systems. My MSc research involves building an NLP model to automatically classify and route helpdesk queries, using real production ticket data.</p>
-        <p>I'm interested in the intersection of NLP, data engineering, and operational systems — where language models meet the messy realities of enterprise data.</p>
-        <ul class="focus-items">
-          <li>Text classification & intent detection</li>
+      <div class="nlp-card reveal">
+        <p class="nlp-card-label">Current focus — ML &amp; NLP</p>
+        <p>
+          I'm actively moving into machine learning — specifically natural
+          language processing applied to information systems. My MSc research
+          involves building a model to automatically classify and route helpdesk
+          queries, using real production ticket data (~30,000 tickets).
+        </p>
+        <p>
+          I'm interested in where NLP meets the messy realities of enterprise
+          data — not clean benchmark datasets, but the noisy, inconsistent
+          stuff from real systems.
+        </p>
+        <ul class="nlp-list">
+          <li>Text classification &amp; intent detection</li>
           <li>BERT and transformer fine-tuning</li>
-          <li>ML pipelines with Python (scikit-learn, HuggingFace)</li>
-          <li>Business Intelligence & Data Analytics</li>
+          <li>scikit-learn / HuggingFace pipelines</li>
+          <li>Business Intelligence &amp; Data Analytics</li>
         </ul>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- SKILLS -->
-  <section id="skills">
+  <!-- ══ SKILLS ══ -->
+  <div class="section" id="skills">
     <div class="reveal">
-      <p class="section-label">technical skills</p>
-      <h2 class="section-title">What I work with</h2>
+      <p class="sec-label">technical skills</p>
+      <h2 class="sec-title">What I work with</h2>
     </div>
-    <div class="skills-grid reveal">
-      <div class="skill-group">
-        <p class="skill-group-title">Languages</p>
-        <div class="skill-tags">
-          <span class="skill-tag">PHP</span>
-          <span class="skill-tag">Laravel</span>
-          <span class="skill-tag">Symfony</span>
-          <span class="skill-tag">Java</span>
-          <span class="skill-tag">Spring Boot</span>
-          <span class="skill-tag highlight">Python</span>
-          <span class="skill-tag">JavaScript</span>
-          <span class="skill-tag">SQL</span>
+    <div class="skill-rows reveal">
+      <div class="skill-row">
+        <span class="skill-row-cat">Languages</span>
+        <div class="pills">
+          <span class="pill">PHP</span>
+          <span class="pill">Laravel</span>
+          <span class="pill">Symfony</span>
+          <span class="pill">Java</span>
+          <span class="pill">Spring Boot</span>
+          <span class="pill g">Python</span>
+          <span class="pill">JavaScript</span>
+          <span class="pill">SQL</span>
         </div>
       </div>
-      <div class="skill-group">
-        <p class="skill-group-title">ML / Data</p>
-        <div class="skill-tags">
-          <span class="skill-tag highlight">NLP</span>
-          <span class="skill-tag highlight">scikit-learn</span>
-          <span class="skill-tag highlight">HuggingFace</span>
-          <span class="skill-tag highlight">BERT</span>
-          <span class="skill-tag highlight">pandas</span>
-          <span class="skill-tag highlight">Jupyter</span>
-          <span class="skill-tag">Data viz</span>
+      <div class="skill-row">
+        <span class="skill-row-cat">ML / NLP</span>
+        <div class="pills">
+          <span class="pill g">NLP</span>
+          <span class="pill g">scikit-learn</span>
+          <span class="pill g">HuggingFace</span>
+          <span class="pill g">BERT</span>
+          <span class="pill g">pandas</span>
+          <span class="pill g">Jupyter</span>
+          <span class="pill">Data visualisation</span>
         </div>
       </div>
-      <div class="skill-group">
-        <p class="skill-group-title">Integration & APIs</p>
-        <div class="skill-tags">
-          <span class="skill-tag">REST APIs</span>
-          <span class="skill-tag">Webhooks</span>
-          <span class="skill-tag">Data sync pipelines</span>
-          <span class="skill-tag">Automated workflows</span>
-          <span class="skill-tag">Structured logging</span>
+      <div class="skill-row">
+        <span class="skill-row-cat">Integration &amp; APIs</span>
+        <div class="pills">
+          <span class="pill">REST APIs</span>
+          <span class="pill">Webhooks</span>
+          <span class="pill">Data sync pipelines</span>
+          <span class="pill">Automated workflows</span>
+          <span class="pill">Structured logging</span>
         </div>
       </div>
-      <div class="skill-group">
-        <p class="skill-group-title">Databases</p>
-        <div class="skill-tags">
-          <span class="skill-tag">Oracle DB</span>
-          <span class="skill-tag">MySQL</span>
-          <span class="skill-tag">MSSQL</span>
-          <span class="skill-tag">DB admin</span>
-          <span class="skill-tag">Data governance</span>
+      <div class="skill-row">
+        <span class="skill-row-cat">Databases</span>
+        <div class="pills">
+          <span class="pill">Oracle DB</span>
+          <span class="pill">MySQL</span>
+          <span class="pill">MSSQL</span>
+          <span class="pill">DB administration</span>
+          <span class="pill">Data governance</span>
         </div>
       </div>
-      <div class="skill-group">
-        <p class="skill-group-title">Infrastructure</p>
-        <div class="skill-tags">
-          <span class="skill-tag">Linux server</span>
-          <span class="skill-tag">Docker</span>
-          <span class="skill-tag">Git / CI-CD</span>
-          <span class="skill-tag">Bash scripting</span>
-          <span class="skill-tag">Windows Server</span>
-          <span class="skill-tag">Disaster recovery</span>
+      <div class="skill-row">
+        <span class="skill-row-cat">Infrastructure</span>
+        <div class="pills">
+          <span class="pill">Linux server</span>
+          <span class="pill">Docker</span>
+          <span class="pill">Git / CI-CD</span>
+          <span class="pill">Bash scripting</span>
+          <span class="pill">Windows Server</span>
+          <span class="pill">Disaster recovery</span>
         </div>
       </div>
-      <div class="skill-group">
-        <p class="skill-group-title">Enterprise Platforms</p>
-        <div class="skill-tags">
-          <span class="skill-tag">OrangeHRM</span>
-          <span class="skill-tag">SeamlessHR</span>
-          <span class="skill-tag">MS Dynamics 365</span>
-          <span class="skill-tag">SharePoint</span>
-          <span class="skill-tag">Google Workspace</span>
+      <div class="skill-row">
+        <span class="skill-row-cat">Enterprise Platforms</span>
+        <div class="pills">
+          <span class="pill">OrangeHRM</span>
+          <span class="pill">SeamlessHR</span>
+          <span class="pill">MS Dynamics 365</span>
+          <span class="pill">SharePoint</span>
+          <span class="pill">Google Workspace</span>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- EXPERIENCE -->
-  <section id="experience">
+  <!-- ══ EXPERIENCE ══ -->
+  <div class="section" id="experience">
     <div class="reveal">
-      <p class="section-label">work experience</p>
-      <h2 class="section-title">Where I've built things</h2>
+      <p class="sec-label">work experience</p>
+      <h2 class="sec-title">Where I've built things</h2>
     </div>
-    <div class="timeline reveal">
+    <div class="exp-entries">
 
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-meta">
-          <span class="timeline-period">Feb 2022 — Present</span>
-          <span class="timeline-org">Higher Education Institution · Nairobi</span>
+      <div class="exp-entry reveal">
+        <div class="exp-left">
+          <div class="exp-period">Feb 2022<br>— Present</div>
+          <div class="exp-org">Higher Education Institution<br>Nairobi, Kenya</div>
         </div>
-        <p class="timeline-role">Software Developer (Systems Developer)</p>
-        <ul>
-          <li>Designed and built an API-driven integration bridge automating HR data synchronisation for 1,500+ staff records, eliminating 3–4 hours of manual data work per cycle.</li>
-          <li>Own the full project lifecycle across departmental systems — from requirements gathering with Finance, HR, and Academic offices through to architecture, deployment, and documentation.</li>
-          <li>Maintain automated data flows across the institution's enterprise platforms, supporting approximately 6,000 staff and students.</li>
-          <li>Serve as database administrator across Oracle DB, MySQL, and MSSQL environments, working with audit and security teams to enforce data governance standards.</li>
-          <li>Implemented zero-touch onboarding and offboarding workflows for automated staff provisioning and de-provisioning.</li>
-          <li>Build analytical dashboards and reports to support data-driven decision-making across HR, finance, and academic performance metrics.</li>
-          <li>Write stakeholder-facing documentation and deliver training for non-technical department heads and institutional leadership.</li>
-        </ul>
+        <div class="exp-right">
+          <p class="exp-role">Software Developer (Systems Developer)</p>
+          <ul class="exp-bul">
+            <li>Designed and built an API-driven integration bridge automating HR data synchronisation for 1,500+ staff records, eliminating 3–4 hours of manual data work per cycle.</li>
+            <li>Own the full project lifecycle across departmental systems — from requirements gathering with Finance, HR, and Academic offices through to architecture, deployment, and documentation.</li>
+            <li>Maintain automated data flows across the institution's enterprise platforms, supporting approximately 6,000 staff and students.</li>
+            <li>Serve as database administrator across Oracle DB, MySQL, and MSSQL environments, working with audit and security teams to enforce data governance standards.</li>
+            <li>Implemented zero-touch onboarding and offboarding workflows for automated staff provisioning and de-provisioning.</li>
+            <li>Build analytical dashboards and reports to support data-driven decision-making across HR, finance, and academic performance metrics.</li>
+            <li>Write stakeholder-facing documentation and deliver training for non-technical department heads and institutional leadership.</li>
+          </ul>
+        </div>
       </div>
 
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-meta">
-          <span class="timeline-period">Mar 2020 — Feb 2022</span>
-          <span class="timeline-org">Microsoft-Certified Enterprise Software Partner · Nairobi</span>
+      <div class="exp-entry reveal">
+        <div class="exp-left">
+          <div class="exp-period">Mar 2020<br>— Feb 2022</div>
+          <div class="exp-org">Microsoft-Certified Enterprise<br>Software Partner · Nairobi</div>
         </div>
-        <p class="timeline-role">Software Developer</p>
-        <ul>
-          <li>Developed and maintained government-facing regulatory portals in PHP (Laravel, Yii) and PHP/MSSQL/SharePoint, requiring strict auditability and data integrity.</li>
-          <li>Implemented and supported Microsoft Dynamics 365 deployments for enterprise clients, including requirements analysis, configuration, and user training.</li>
-          <li>Administered Windows Server environments and contributed to system architecture decisions for client-facing solutions.</li>
-          <li>Wrote clean, documented code against technical specifications and led root-cause analysis for reported defects.</li>
-        </ul>
+        <div class="exp-right">
+          <p class="exp-role">Software Developer</p>
+          <ul class="exp-bul">
+            <li>Developed and maintained government-facing regulatory portals in PHP (Laravel, Yii) and PHP/MSSQL/SharePoint, requiring strict auditability and data integrity.</li>
+            <li>Implemented and supported Microsoft Dynamics 365 deployments for enterprise clients, including requirements analysis, configuration, and user training.</li>
+            <li>Administered Windows Server environments and contributed to system architecture decisions for client-facing solutions.</li>
+            <li>Wrote clean, documented code against technical specifications and led root-cause analysis for reported defects.</li>
+          </ul>
+        </div>
       </div>
 
     </div>
-  </section>
+  </div>
 
-  <!-- PROJECTS -->
-  <section id="projects">
+  <!-- ══ PROJECTS ══ -->
+  <div class="section" id="projects">
     <div class="reveal">
-      <p class="section-label">notable projects</p>
-      <h2 class="section-title">Some of The Things I've shipped</h2>
+      <p class="sec-label">notable projects</p>
+      <h2 class="sec-title">Things I've shipped</h2>
     </div>
-    <div class="projects-grid reveal">
+    <div class="proj-grid reveal">
 
-      <div class="project-card">
-        <div class="project-card-top">
-          <div class="project-icon">🔗</div>
-          <span class="project-tag tag-accent">Integration</span>
-        </div>
-        <p class="project-title">HR System Integration Bridge</p>
-        <p class="project-desc">Custom PHP/Laravel bridge connecting two enterprise HR platforms via REST APIs. Automates data synchronisation for 1,500+ staff records, replacing a labour-intensive manual reconciliation process.</p>
-        <div class="project-stack">
-          <span class="stack-pill">PHP</span>
-          <span class="stack-pill">Laravel</span>
-          <span class="stack-pill">REST API</span>
-          <span class="stack-pill">MySQL</span>
+      <div class="proj-card">
+        <div class="proj-accent"></div>
+        <p class="proj-cat">Integration</p>
+        <p class="proj-title">HR System Integration Bridge</p>
+        <p class="proj-desc">Custom PHP/Laravel bridge connecting two enterprise HR platforms via REST APIs. Automates data synchronisation for 1,500+ staff records, replacing a labour-intensive manual reconciliation process.</p>
+        <div class="proj-stack">
+          <span class="proj-pill">PHP</span>
+          <span class="proj-pill">Laravel</span>
+          <span class="proj-pill">REST API</span>
+          <span class="proj-pill">MySQL</span>
         </div>
       </div>
 
-      <div class="project-card">
-        <div class="project-card-top">
-          <div class="project-icon">🎓</div>
-          <span class="project-tag tag-accent">Enterprise</span>
-        </div>
-        <p class="project-title">Academic Management System</p>
-        <p class="project-desc">Java / Spring Boot / Oracle DB system managing student and academic records for ~6,000 users at a major Kenyan university. Developer and ongoing system administrator.</p>
-        <div class="project-stack">
-          <span class="stack-pill">Java</span>
-          <span class="stack-pill">Spring Boot</span>
-          <span class="stack-pill">Oracle DB</span>
-          <span class="stack-pill">Thymeleaf</span>
+      <div class="proj-card">
+        <div class="proj-accent"></div>
+        <p class="proj-cat">Enterprise</p>
+        <p class="proj-title">Academic Management System</p>
+        <p class="proj-desc">Java / Spring Boot / Oracle DB system managing student and academic records for ~6,000 users at a major Kenyan university. Developer and ongoing system administrator.</p>
+        <div class="proj-stack">
+          <span class="proj-pill">Java</span>
+          <span class="proj-pill">Spring Boot</span>
+          <span class="proj-pill">Oracle DB</span>
+          <span class="proj-pill">Thymeleaf</span>
         </div>
       </div>
 
-      <div class="project-card">
-        <div class="project-card-top">
-          <div class="project-icon">🤖</div>
-          <span class="project-tag tag-teal">ML / NLP Research</span>
-        </div>
-        <p class="project-title">NLP Query Routing System</p>
-        <p class="project-desc">MSc research project: building a model to automatically classify and route student helpdesk tickets using real production data (~30,000 tickets). Compares Logistic Regression, SVM, and BERT.</p>
-        <div class="project-stack">
-          <span class="stack-pill">Python</span>
-          <span class="stack-pill">BERT</span>
-          <span class="stack-pill">scikit-learn</span>
-          <span class="stack-pill">Flask</span>
-          <span class="stack-pill">Laravel</span>
+      <div class="proj-card">
+        <div class="proj-accent amber"></div>
+        <p class="proj-cat amber">ML / NLP Research</p>
+        <p class="proj-title">NLP Query Routing System</p>
+        <p class="proj-desc">MSc research project: building a model to automatically classify and route student helpdesk tickets using real production data (~30,000 tickets). Compares Logistic Regression, SVM, and BERT.</p>
+        <div class="proj-stack">
+          <span class="proj-pill">Python</span>
+          <span class="proj-pill">BERT</span>
+          <span class="proj-pill">scikit-learn</span>
+          <span class="proj-pill">Flask</span>
+          <span class="proj-pill">Laravel</span>
         </div>
       </div>
 
-      <div class="project-card">
-        <div class="project-card-top">
-          <div class="project-icon">🌍</div>
-          <span class="project-tag tag-teal">Personal · OSS</span>
-        </div>
-        <p class="project-title">A Language Platform</p>
-        <p class="project-desc">A cultural preservation platform for a language — public flashcard system, proverb and phrase libraries, contributor portal, and admin moderation panel. Built as a personal initiative.</p>
-        <div class="project-stack">
-          <span class="stack-pill">Laravel 13</span>
-          <span class="stack-pill">Livewire</span>
-          <span class="stack-pill">Alpine.js</span>
-          <span class="stack-pill">Tailwind</span>
+      <div class="proj-card">
+        <div class="proj-accent amber"></div>
+        <p class="proj-cat amber">Personal</p>
+        <p class="proj-title">Ekegusii Language Platform</p>
+        <p class="proj-desc">A cultural preservation platform for the Ekegusii language — public flashcard system, proverb and phrase libraries, contributor portal, and admin moderation panel. A personal initiative.</p>
+        <div class="proj-stack">
+          <span class="proj-pill">Laravel 13</span>
+          <span class="proj-pill">Livewire</span>
+          <span class="proj-pill">Alpine.js</span>
+          <span class="proj-pill">Tailwind CSS</span>
         </div>
       </div>
 
-      <div class="project-card">
-        <div class="project-card-top">
-          <div class="project-icon">📊</div>
-          <span class="project-tag tag-teal">ML Pipeline</span>
-        </div>
-        <p class="project-title">Loan Default Prediction Pipeline</p>
-        <p class="project-desc">End-to-end ML pipeline in Python covering EDA, hypothesis testing, feature engineering, and multi-model comparison. Achieved AUC 0.940 with Gradient Boosting on a structured finance dataset.</p>
-        <div class="project-stack">
-          <span class="stack-pill">Python</span>
-          <span class="stack-pill">pandas</span>
-          <span class="stack-pill">scikit-learn</span>
-          <span class="stack-pill">XGBoost</span>
+      <div class="proj-card">
+        <div class="proj-accent amber"></div>
+        <p class="proj-cat amber">ML Pipeline</p>
+        <p class="proj-title">Loan Default Prediction Pipeline</p>
+        <p class="proj-desc">End-to-end ML pipeline covering EDA, hypothesis testing, feature engineering, and multi-model comparison. Achieved AUC 0.940 with Gradient Boosting on a structured finance dataset.</p>
+        <div class="proj-stack">
+          <span class="proj-pill">Python</span>
+          <span class="proj-pill">pandas</span>
+          <span class="proj-pill">scikit-learn</span>
+          <span class="proj-pill">XGBoost</span>
         </div>
       </div>
 
-      <div class="project-card">
-        <div class="project-card-top">
-          <div class="project-icon">🏛️</div>
-          <span class="project-tag tag-accent">Government</span>
-        </div>
-        <p class="project-title">Regulatory Data Portals</p>
-        <p class="project-desc">Production government-facing portals for regulatory data submission and licence management. Required strict auditability, error handling, and data integrity standards throughout.</p>
-        <div class="project-stack">
-          <span class="stack-pill">PHP</span>
-          <span class="stack-pill">Laravel</span>
-          <span class="stack-pill">Yii</span>
-          <span class="stack-pill">MSSQL</span>
-          <span class="stack-pill">SharePoint</span>
+      <div class="proj-card">
+        <div class="proj-accent"></div>
+        <p class="proj-cat">Government</p>
+        <p class="proj-title">Regulatory Data Portals</p>
+        <p class="proj-desc">Production government-facing portals for regulatory data submission and licence management. Required strict auditability, error handling, and data integrity standards throughout.</p>
+        <div class="proj-stack">
+          <span class="proj-pill">PHP</span>
+          <span class="proj-pill">Laravel</span>
+          <span class="proj-pill">Yii</span>
+          <span class="proj-pill">MSSQL</span>
+          <span class="proj-pill">SharePoint</span>
         </div>
       </div>
 
     </div>
-  </section>
+  </div>
 
-  <!-- EDUCATION -->
-  <section id="education">
+  <!-- ══ EDUCATION ══ -->
+  <div class="section" id="education">
     <div class="reveal">
-      <p class="section-label">education</p>
-      <h2 class="section-title">Academic background</h2>
+      <p class="sec-label">education</p>
+      <h2 class="sec-title">Academic background</h2>
     </div>
     <div class="edu-grid reveal">
-      <div class="edu-card current">
-        <p class="edu-degree">MSc. Information Technology</p>
-        <p class="edu-spec">Business Intelligence & Data Analytics</p>
-        <p class="edu-meta">Strathmore University · 2025 – Present</p>
+      <div class="edu-card active">
+        <p class="edu-deg">MSc. Information Technology</p>
+        <p class="edu-spec">Business Intelligence &amp; Data Analytics</p>
+        <p class="edu-meta">Strathmore University &nbsp;·&nbsp; 2025 – Present</p>
       </div>
       <div class="edu-card">
-        <p class="edu-degree">Personal Leadership Programme</p>
-        <p class="edu-spec">Team leadership & stakeholder engagement</p>
-        <p class="edu-meta">Strathmore Business School · 2025</p>
+        <p class="edu-deg">Personal Leadership Programme</p>
+        <p class="edu-spec">Team leadership &amp; stakeholder engagement</p>
+        <p class="edu-meta">Strathmore Business School &nbsp;·&nbsp; 2025</p>
       </div>
       <div class="edu-card">
-        <p class="edu-degree">BSc. Computer Science</p>
-        <p class="edu-spec"></p>
-        <p class="edu-meta">Maasai Mara University · 2013 – 2018</p>
+        <p class="edu-deg">BSc. Computer Science</p>
+        <p class="edu-meta">Maasai Mara University &nbsp;·&nbsp; 2013 – 2018</p>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- FOOTER -->
+  <!-- ══ FOOTER ══ -->
   <footer>
-    <div class="footer-name">Emmanuel <span>Anasi</span></div>
-    <ul class="footer-links">
-      <li><a href="mailto:Emmanuelomonso@gmail.com">Email</a></li>
-      <li><a href="https://github.com/omonsoanasi" target="_blank">GitHub</a></li>
-      <li><a href="tel:+254702000116">+254 702 000 116</a></li>
-    </ul>
+    <div class="footer-inner">
+      <div class="footer-name">Emmanuel <em>Omonso Anasi</em></div>
+      <ul class="footer-links">
+        <li><a href="mailto:Emmanuelomonso@gmail.com">Emmanuelomonso@gmail.com</a></li>
+        <li><a href="https://github.com/omonsoanasi" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="tel:+254702000116">+254 702 000 116</a></li>
+      </ul>
+    </div>
   </footer>
 
   <script>
-    const roles = [
-      'Systems Developer',
-      'Enterprise Integration Engineer',
-      'NLP Researcher',
-      'Machine Learning Engineer (in progress)',
-      'API & Data Pipeline Builder',
-    ];
-    let ri = 0, ci = 0, deleting = false;
-    const el = document.getElementById('typed-role');
-    function type() {
-      const word = roles[ri];
-      if (!deleting) {
-        el.textContent = word.slice(0, ++ci);
-        if (ci === word.length) { deleting = true; setTimeout(type, 2000); return; }
-      } else {
-        el.textContent = word.slice(0, --ci);
-        if (ci === 0) { deleting = false; ri = (ri + 1) % roles.length; }
-      }
-      setTimeout(type, deleting ? 40 : 80);
-    }
-    type();
-
+    // Scroll reveal
     const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-    }, { threshold: 0.1 });
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.08 });
     document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    // Nav shadow on scroll
+    const navEl = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      navEl.style.boxShadow = window.scrollY > 8
+        ? '0 1px 0 rgba(26,23,20,0.07)'
+        : '';
+    }, { passive: true });
   </script>
 </body>
 </html>
